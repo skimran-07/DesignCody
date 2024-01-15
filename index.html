@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+  <meta charset=UTF-8>
+  <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1">
+  <meta http-equiv=X-UA-Compatible content="ie=edge">
+  <title>Home | DesignCody</title>
+  <link rel="stylesheet preload" as=style href=css/preload.min.css>
+  <link rel="stylesheet preload" as=style href=css/icomoon.css>
+  <link rel="stylesheet preload" as=style href=css/libs.min.css>
+  <link rel=stylesheet href=css/index.min.css>
+  <link rel=stylesheet href=css/floatbutton.min.css>
+</head>
+<style>
+  /* body {
+	 width: 100%;
+	 margin: 0;
+	 padding: 0;
+	 font-family: open sans;
+	 background: #f8f8f8;
+} */
+  /* h3 {
+	 text-align: center;
+	 margin: 6% auto;
+	 font-size: 1.8rem;
+	 font-weight: 800;
+	 color: #444;
+} */
+  .slider {
+    display: flex;
+    height: 370px;
+    max-height: auto;
+    overflow-y: hidden;
+    overflow-x: scroll !important;
+    padding: 16px;
+    transform: scroll(calc(var(--i, 0)/var(--n)*-100%));
+    scroll-behavior: smooth;
+  }
+
+  .slider::-webkit-scrollbar {
+    height: 5px;
+    width: 150px;
+    display: none;
+  }
+
+  .slider::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .slider::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  .slider::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .slider img:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .slide {
+
+    position: relative;
+  }
+
+  .slide img {
+    height: 100%;
+    width: 250px;
+    margin: 0 10px;
+    object-fit: cover;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .25s ease-in-out;
+  }
+
+  .control-prev-btn {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.55);
+    height: 100px;
+    line-height: 100px;
+    width: 45px;
+    text-align: center;
+    box-shadow: 0 1px 3px #888;
+    user-select: none;
+    color: #444;
+    cursor: pointer;
+  }
+
+  .control-next-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.55);
+    height: 100px;
+    line-height: 100px;
+    width: 45px;
+    text-align: center;
+    box-shadow: 0 1px 3px #888;
+    user-select: none;
+    color: #444;
+    cursor: pointer;
+  }
+
+  .slide img.zoomed {
+    width: 500px;
+    height: 600px;
+    position: fixed;
+    left: 25%;
+    top: 0%;
+    z-index: 1000;
+    transform: scale(1) translatey(0) !important;
+
+  }
+
+  .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .45);
+    top: 0;
+    display: none;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  @media only screen and (max-width: 420px) {
+    .slider {
+      padding: 0;
+    }
+
+    .slide {
+      padding: 16px 10px;
+    }
+
+    .slide img {
+      margin: 0;
+    }
+
+    .control-prev-btn {
+      top: 37%;
+    }
+
+    .control-next-btn {
+      top: 37%;
+    }
+  }
+</style>
+
+<body>
+  <header class="header" data-page="home" data-page-parent="home">
+    <div class="header_bg">
+      <picture>
+        <source data-srcset="img/gradients/10.webp" srcset="img/gradients/10.webp" type="image/webp" />
+        <img class="lazy" data-src="img/gradients/10.png" src="img/gradients/10.png" alt="media" />
+      </picture>
+    </div>
+    <div class="container d-flex">
+      <a class="header_logo logo" href="index.html">
+        <!-- <span class="header_logo-wrapper">
+          <img src="svg/logo--black.svg" alt="UpCreators" />
+        </span> -->
+        <span class="text">DESIGN CODY</span>
+      </a>
+      <nav class="header_nav text--medium text--md collapse" id="headerMenu">
+        <ul class="header_nav-list">
+          <li class="header_nav-list_item">
+            <a class="nav-link nav-item dropdown-toggle" href="index.html" data-bs-toggle="collapse"
+              data-bs-target="#homeMenu" data-trigger="dropdown" data-main-link="true" aria-expanded="false"
+              aria-controls="homeMenu" data-page="home" data-page-parent="home">
+              <span class="nav-item_text"> Home </span>
+
+            </a>
+            <div class="dropdown-menu collapse" id="homeMenu">
+
+            </div>
+          </li>
+          <li class="header_nav-list_item">
+            <a class="nav-item nav-link" href="about.html" data-page="about" data-single="true">
+              <span class="nav-item_text">About</span>
+            </a>
+          </li>
+          <li class="header_nav-list_item">
+            <a class="nav-item nav-link" href="ourwork.html" data-page="ourwork" data-single="true">
+              <span class="nav-item_text">Our Work</span>
+            </a>
+          </li>
+
+          <li class="header_nav-list_item">
+            <a class="nav-item nav-link" href="services.html" data-page="services" data-single="true">
+              <span class="nav-item_text">Services</span>
+            </a>
+          </li>
+
+          <!-- <li class="header_nav-list_item">
+            <a class="nav-item nav-link" href="events.html" data-page="events" data-single="true">
+              <span class="nav-item_text">Collaborators</span>
+            </a>
+          </li> -->
+          <li class="header_nav-list_item">
+            <a class="nav-item nav-link" href="contacts.html" data-page="contacts" data-single="true">
+              <span class="nav-item_text">Contact</span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <div class="header_user">
+        <a class="header_user-btn btn btn--outline" href="contacts.html">Get In Touch <i
+            class="icon icon-arrow-right"></i> </a>
+
+
+      </div>
+      <button class="header_trigger" id="headerTrigger" data-bs-toggle="collapse" data-bs-target="#headerMenu"
+        aria-controls="headerMenu" aria-expanded="false" type="button"></button>
+    </div>
+  </header>
+  <main>
+    <section class=hero>
+      <div class=hero_logo><img src=svg/logo--white.svg alt=UpCreators></div>
+      <div class=container>
+        <div class=hero_main>
+          <div class="hero_main-icon rotate shape"><svg width=69 height=69 viewBox="0 0 69 69" fill=none
+              xmlns=http://www.w3.org/2000/svg>
+              <path
+                d="M42.993 69L34.5 51.2698L26.007 69L16.1104 64.9008L22.6419 46.3582L4.09932 52.8899L0 42.993L17.7302 34.5L0 26.007L4.09932 16.1103L22.6419 22.6418L16.1104 4.09921L26.007 0L34.5 17.7302L42.993 0L52.8899 4.09921L46.3582 22.6418L64.9008 16.1103L69 26.007L51.2698 34.5L69 42.993L64.9008 52.8899L46.3582 46.3582L52.8899 64.9008L42.993 69Z"
+                fill=currentColor />
+            </svg></div>
+          <h1 class=hero_main-title><span class=d-inline-block data-aos=fade-left>DIGITAL CONTENT</span> <span
+              class=d-inline-block data-aos=fade-left data-aos-delay=50>CREATION SERVICES</span></h1>
+          <h4 class=hero_main-title2> <span class=d-inline-block data-aos=fade-left data-aos-delay=100>VIDEO PRODUTION
+              .GRAPHIC DESIGN .PHOTOGRAPHY</span></h4>
+        </div>
+        <div class=hero_media><span class=hero_media-img>
+            <picture>
+              <source data-srcset=img/index/herodoggo.webp srcset=img/index/herodoggo.webp type=image/webp><img
+                class=lazy data-src=img/index/herodoggo.png src=img/index/herodoggo.png alt=doggo>
+            </picture>
+          </span>
+          <a class="circular eyeTrigger videoTrigger" href=https://youtu.be/xY5U1HLPlN8?si=n1BLaj20g2KHpyBu
+            target="_blank" data-video=SfMT4Agg8Xw><i class=icon-play></i> <span class="circular_text rotate slower"
+              data-text="Watch Design Cody . SHOWREEL"></span></a>
+          <!-- <ul class=socials>
+                            <li><a href=https://instagram.com target=_blank rel="noopener noreferrer"><i class=icon-instagram></i></a></li>
+                            <li><a href=https://tiktok.com target=_blank rel="noopener noreferrer"><i class=icon-tiktok></i></a></li>
+                            <li><a href=https://youtube.com target=_blank rel="noopener noreferrer"><i class=icon-youtube></i></a></li>
+                            <li><a href=https://facebook.com target=_blank rel="noopener noreferrer"><i class=icon-facebook></i></a></li>
+                        </ul> -->
+        </div>
+      </div>
+    </section>
+    <br>
+    <section class="cases section">
+      <div class=container>
+        <div class=section_nav>
+          <h3 class=section_nav-title><i class=icon-bold-cross></i> VIDEO PRODUCTION</h3>
+          <div class=section_nav-controls><span class=divider></span>
+            <div class=section_nav-controls_btns><button class="link splide__arrow--prev" type=button
+                aria-label="Previous slide"><i class=icon-angle-left></i></button> <button
+                class="link splide__arrow--next" type=button aria-label="Next slide"><i
+                  class=icon-angle-right></i></button></div>
+          </div>
+        </div>
+        <div class="cases_slider splide">
+          <div class=splide__track>
+            <div class=splide__list>
+              <div class="cases_slider-slide splide__slide">
+                <!-- <div class=overlay>
+                  <div class=hotspot tabindex=0><span class=hotspot_trigger></span>
+                    <div class=hotspot_content><a class=link href=product.html><span class=preview>
+                          <picture>
+                            <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.webp srcset=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.webp type=image/webp><img
+                              class=lazy data-src=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.jpg src=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.jpg alt="Case #1 Bikini">
+                          </picture>
+                        </span><span class=info><span class=info_title>D&G Bikini</span> <span
+                            class=info_price>$599</span></span></a></div>
+                  </div>
+                </div> -->
+                <div class=media>
+                  <picture>
+                    <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.webp
+                      srcset=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.webp type=image/webp><img class=lazy
+                      data-src=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.jpg
+                      src=img\VIDEOPRODUCTIONCAROUSEL\1EVENTSHOOT.jpg alt="Case #1">
+                  </picture>
+                </div>
+                <!-- <div class=main><a class="main_title h6" href=case.html>[ Collaboration with Nikki Sports ]</a> <a
+                    class="link link--underline" href=#>@looksyinstagirl</a></div> -->
+              </div>
+              <div class="cases_slider-slide splide__slide">
+                <!-- <div class=overlay>
+                  <div class=hotspot tabindex=0><span class=hotspot_trigger></span>
+                    <div class=hotspot_content><a class=link href=product.html><span class=preview>
+                          <picture>
+                            <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.webp srcset=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.webp type=image/webp><img
+                              class=lazy data-src=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.jpg src=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.jpg alt="Case #2 T-Shirt">
+                          </picture>
+                        </span><span class=info><span class=info_title>T-shirt</span> <span
+                            class=info_price>$19</span></span></a></div>
+                  </div>
+                  <div class=hotspot tabindex=0><span class=hotspot_trigger></span>
+                    <div class=hotspot_content><a class=link href=product.html><span class=preview>
+                          <picture>
+                            <source data-srcset=img/cases/tracks.webp srcset=img/cases/tracks.webp type=image/webp><img
+                              class=lazy data-src=img/cases/tracks.jpg src=img/cases/tracks.jpg alt="Case #2 Tracks">
+                          </picture>
+                        </span><span class=info><span class=info_title>Tracks</span> <span
+                            class=info_price>$159</span></span></a></div>
+                  </div>
+                  <div class=hotspot tabindex=0><span class=hotspot_trigger></span>
+                    <div class=hotspot_content><a class=link href=product.html><span class=preview>
+                          <picture>
+                            <source data-srcset=img/cases/sweater.webp srcset=img/cases/sweater.webp type=image/webp>
+                            <img class=lazy data-src=img/cases/sweater.jpg src=img/cases/sweater.jpg
+                              alt="Case #2 Sweater">
+                          </picture>
+                        </span><span class=info><span class=info_title>Yellow sweater</span> <span
+                            class=info_price>$230</span></span></a></div>
+                  </div>
+                </div> -->
+                <div class=media>
+                  <a class=link href=product.html>
+                    <picture>
+                      <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.webp
+                        srcset=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.webp type=image/webp><img class=lazy
+                        data-src=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.jpg
+                        src=img\VIDEOPRODUCTIONCAROUSEL\2FIELDTRIP.jpg alt="Case #2">
+                    </picture>
+                  </a>
+                </div>
+                <!-- <div class=main>
+                  <h6 class=main_title>New Collection with YG-34</h6><a class="link link--underline" href=#>#shopnow</a>
+                </div> -->
+              </div>
+              <div class="cases_slider-slide splide__slide">
+                <div class=media>
+                  <a class=link href=product.html>
+                    <picture>
+                      <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\3REALESTATE.webp
+                        srcset=img\VIDEOPRODUCTIONCAROUSEL\3REALESTATE.webp type=image/webp><img class=lazy
+                        data-src=img\VIDEOPRODUCTIONCAROUSEL\3REALESTATE.jpg
+                        src=img\VIDEOPRODUCTIONCAROUSEL\3REALESTATE.jpg alt="Case #3">
+                    </picture>
+                  </a>
+                </div>
+                <!-- <div class=main>
+                  <h6 class=main_title>Presentation from Off Black Limited</h6><a class="link link--underline"
+                    href=#>#newcollection</a>
+                </div> -->
+              </div>
+              <div class="cases_slider-slide splide__slide">
+                <!-- <div class=overlay>
+                  <div class=hotspot tabindex=0><span class=hotspot_trigger></span>
+                    <div class=hotspot_content><a class=link href=product.html><span class=preview>
+                          <picture>
+                            <source data-srcset=img/cases/bottle.webp srcset=img/cases/bottle.webp type=image/webp><img
+                              class=lazy data-src=img/cases/bottle.jpg src=img/cases/bottle.jpg alt="Case #4 Bottle">
+                          </picture>
+                        </span><span class=info><span class=info_title>Bottle</span> <span
+                            class=info_price>$12</span></span></a></div>
+                  </div>
+                </div> -->
+                <div class=media>
+                  <a class=link href=product.html>
+                    <picture>
+                      <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\4BUSINESSINTERVIEWS.webp
+                        srcset=img\VIDEOPRODUCTIONCAROUSEL\4BUSINESSINTERVIEWS.webp type=image/webp><img class=lazy
+                        data-src=img\VIDEOPRODUCTIONCAROUSEL\4BUSINESSINTERVIEWS.jpg
+                        src=img\VIDEOPRODUCTIONCAROUSEL\4BUSINESSINTERVIEWS.jpg alt="Case #4">
+                    </picture>
+                  </a>
+                </div>
+                <!-- <div class=main>
+                  <h6 class=main_title>New Branding Campaign</h6><a class="link link--underline"
+                    href=#>@looksyinstagirl</a>
+                </div> -->
+              </div>
+              <div class="cases_slider-slide splide__slide">
+                <div class=media>
+                  <a class=link href=product.html>
+                    <picture>
+                      <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.webp
+                        srcset=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.webp type=image/webp><img class=lazy
+                        data-src=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.jpg
+                        src=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.jpg alt="Case #5">
+                    </picture>
+                  </a>
+                </div>
+                <!-- <div class=main>
+                  <h6 class=main_title>Creating a street style icon with Upcreators Fashion Brand</h6>
+                </div> -->
+              </div>
+              <!-- <div class="cases_slider-slide splide__slide">
+                <div class=overlay>
+                  <div class=hotspot tabindex=0><span class=hotspot_trigger></span>
+                    <div class=hotspot_content><a class=link href=product.html><span class=preview>
+                          <picture>
+                            <source data-srcset=img/cases/puffer.webp srcset=img/cases/puffer.webp type=image/webp><img
+                              class=lazy data-src=img/cases/puffer.jpg src=img/cases/puffer.jpg alt="Case #6 Puffer">
+                          </picture>
+                        </span><span class=info><span class=info_title>Puffer</span> <span
+                            class=info_price>$999</span></span></a></div>
+                  </div>
+                </div>
+                <div class=media>
+                  <a class=link href=product.html>
+                    <picture>
+                      <source data-srcset=img/cases/case06.webp srcset=img/cases/case06.webp type=image/webp><img
+                        class=lazy data-src=img/cases/case06.jpg src=img/cases/case06.jpg alt="Case #6">
+                    </picture>
+                  </a>
+                </div>
+                <div class=main>
+                  <h6 class=main_title>Viral Challenge</h6><a class="link link--underline" href=#>#getorangeback</a>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features features--1 section">
+      <div class=container>
+        <div class="features_media d-flex">
+          <div class="features_media-item youtube laxY" data-aos=zoom-in data-aos-duration=600>
+            <picture>
+              <source data-srcset=img/index/youtube.webp srcset=img/index/youtube.webp type=image/webp><img class=lazy
+                data-src=img/index/youtube.png src=img/index/youtube.png alt=media>
+            </picture>
+          </div>
+          <div class="features_media-item stories" data-aos=zoom-in data-aos-duration=600>
+            <picture>
+              <source data-srcset=img/index/stories.webp srcset=img/index/stories.webp type=image/webp><img class=lazy
+                data-src=img/index/stories.png src=img/index/stories.png alt=media>
+            </picture>
+          </div>
+          <div class="features_media-item post laxYinvert" data-aos=zoom-in data-aos-duration=600>
+            <picture>
+              <source data-srcset=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.webp
+                srcset=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.webp type=image/webp><img class=lazy
+                data-src=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.png src=img\VIDEOPRODUCTIONCAROUSEL\5DOCPROJECT.png
+                alt=media>
+            </picture>
+          </div>
+        </div>
+        <div class=features_main>
+          <div class="features_main-icon rotate shape"><svg width=69 height=69 viewBox="0 0 69 69" fill=none
+              xmlns=http://www.w3.org/2000/svg>
+              <path
+                d="M42.993 69L34.5 51.2698L26.007 69L16.1104 64.9008L22.6419 46.3582L4.09932 52.8899L0 42.993L17.7302 34.5L0 26.007L4.09932 16.1103L22.6419 22.6418L16.1104 4.09921L26.007 0L34.5 17.7302L42.993 0L52.8899 4.09921L46.3582 22.6418L64.9008 16.1103L69 26.007L51.2698 34.5L69 42.993L64.9008 52.8899L46.3582 46.3582L52.8899 64.9008L42.993 69Z"
+                fill=currentColor />
+            </svg></div>
+          <h2 class="features_main-title h1 outlined outlined--black" data-aos=fade-left>VIDEO PRODUCTION</h2>
+          <h2 class=features_main-subtitle data-aos=fade-left data-aos-delay=50>Digital Marketing Content</h2>
+          <p class="features_main-text text--md" data-aos=fade-left data-aos-delay=100>Our Video Production Services are
+            your gateway to captivating
+            storytelling and visually stunning content. Whether you're looking
+            for promotional videos, corporate storytelling, event coverage,
+            We tailor our expertise to meet your unique needs.
+          </p>
+          <div class="features_main-wrapper d-flex"><a class="btn btn--accent btn--arrow" href=contacts.html>PORTFOLIO
+              <i class="icon icon-arrow-right"></i> </a><a class="btn btn--outline btn--arrow"
+              href="https://api.whatsapp.com/send?phone=7400226221" target="_blank">WhatsApp Chat <i
+                class="icon icon-arrow-right"></i></a></div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- here carousel -->
+    <section class="cases section" style="padding-top: 10%;">
+      <div class=container>
+        <div class=section_nav>
+          <h3 class=section_nav-title><i class=icon-bold-cross></i> FEATURED PROJECTS</h3>
+          <div class=section_nav-controls><span class=divider></span>
+            <div class=section_nav-controls_btns><button class="link splide__arrow--prev" onclick="prev()" type=button
+                aria-label="Previous slide"><i class=icon-angle-left></i></button> <button
+                class="link splide__arrow--next" onclick="next()" type=button aria-label="Next slide"><i
+                  class=icon-angle-right></i></button></div>
+
+          </div>
+        </div>
+        <!-- <h3>Simple Slider With Zoom</h3> -->
+        <div id="slider-container" class="slider">
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 1.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 2.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 3.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 4.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 5.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 6.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 7.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 8.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 9.webp" alt="">
+          </div>
+          <div class="slide">
+            <img src="img\FEATUREDPROJECTSCAROUSEL\Artboard 10.webp" alt="">
+          </div>
+   
+        </div>
+      </div>
+
+     
+
+
+      <div class="overlay"></div>
+      </div>
+    </section>
+
+<br>
+<br>
+
+
+
+    <section class="features features--2 section">
+      <div class=container>
+        <div class="features_media d-flex">
+          <div class="features_media-item dashboard" data-aos=zoom-in data-aos-duration=600>
+            <picture>
+              <source data-srcset=img/index/dashboard.webp srcset=img/index/dashboard.webp type=image/webp><img
+                class=lazy data-src=img/index/dashboard.png src=img/index/dashboard.png alt=media>
+            </picture>
+          </div>
+          <div class="features_media-item preview" data-aos=zoom-in data-aos-duration=600>
+            <picture>
+              <source data-srcset=img/index/preview.webp srcset=img/index/preview.webp type=image/webp><img class=lazy
+                data-src=img/index/preview.png src=img/index/preview.png alt=media>
+            </picture>
+          </div>
+          <div class="features_media-item element laxYinvert" data-aos=zoom-in data-aos-duration=600><span
+              class="icon d-flex align-items-center justify-content-center"><i class=icon-check></i> </span><span
+              class=title>Advanced Media Plan</span></div>
+        </div>
+        <div class=features_main>
+          <div class="features_main-icon rotate shape"><svg width=69 height=69 viewBox="0 0 69 69" fill=none
+              xmlns=http://www.w3.org/2000/svg>
+              <path
+                d="M42.993 69L34.5 51.2698L26.007 69L16.1104 64.9008L22.6419 46.3582L4.09932 52.8899L0 42.993L17.7302 34.5L0 26.007L4.09932 16.1103L22.6419 22.6418L16.1104 4.09921L26.007 0L34.5 17.7302L42.993 0L52.8899 4.09921L46.3582 22.6418L64.9008 16.1103L69 26.007L51.2698 34.5L69 42.993L64.9008 52.8899L46.3582 46.3582L52.8899 64.9008L42.993 69Z"
+                fill=currentColor />
+            </svg></div>
+          <h2 class="features_main-title h1 outlined outlined--black" data-aos=fade-left>Social Media Creatives</h2>
+          <!-- <h2 class=features_main-title data-aos=fade-left data-aos-delay=100>Creatives</h2> -->
+          <h2 class=features_main-subtitle data-aos=fade-left data-aos-delay=50>For your marketing campaign</h2>
+          <p class="features_main-text text--md" data-aos=fade-left data-aos-delay=100>Elevate your online presence with
+            our Social Media Creatives Services!
+            We turn ideas into eye-catching visuals, From stunning graphics to
+            compelling videos, we bring your brand to life on every platform. 🌐
+            Let's tell your story in pixels and create a digital masterpiece together!
+          </p>
+          <div class="features_main-wrapper d-flex"><a class="btn btn--accent btn--hover-black" href=contacts.html>
+              VIEW PORTFOLIO</a></div>
+        </div>
+      </div>
+    </section>
+    <!-- <div class="services section">
+      <div class=container>
+        <ul class=services_list>
+          <li class=services_list-item>
+            <div class=cover>
+              <div class=cover_shape><img src=svg/shapes/28.svg alt=media></div>
+              <h4 class=cover_title>Influencer Marketing <span class=linebreak>SMM</span></h4>
+            </div>
+            <div class=content>
+              <div class=content_bg>
+                <picture>
+                  <source data-srcset=img/index/service01.webp srcset=img/index/service01.webp type=image/webp><img
+                    class=lazy data-src=img/index/service01.jpg src=img/index/service01.jpg
+                    alt="Influencer Marketing SMM">
+                </picture><span class=content_bg-overlay></span>
+              </div>
+              <div class=content_main>
+                <h4 class=content_main-title>Influencer Marketing <span class=linebreak>SMM</span></h4>
+                <p class=content_main-text>Curabitur non erat purus. Cras eu lorem et magna facilisis faucibus vel
+                  tempor purus. Donec eu lorem rutrum, condimentum sem feugiat, egestas</p><a
+                  class="content_main-btn btn btn--accent btn--arrow" href=#>Read More <i
+                    class="icon-arrow-right icon"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class=services_list-item>
+            <div class=cover>
+              <div class=cover_shape><img src=svg/shapes/24.svg alt=media></div>
+              <h4 class=cover_title>Visual Identity Photo and Video</h4>
+            </div>
+            <div class=content>
+              <div class=content_bg>
+                <picture>
+                  <source data-srcset=img/index/service02.webp srcset=img/index/service02.webp type=image/webp><img
+                    class=lazy data-src=img/index/service02.jpg src=img/index/service02.jpg
+                    alt="Visual Identity Photo and Video">
+                </picture><span class=content_bg-overlay></span>
+              </div>
+              <div class=content_main>
+                <h4 class=content_main-title>Visual Identity Photo and Video</h4>
+                <p class=content_main-text>Curabitur non erat purus. Cras eu lorem et magna facilisis faucibus vel
+                  tempor purus. Donec eu lorem rutrum, condimentum sem feugiat, egestas</p><a
+                  class="content_main-btn btn btn--accent btn--arrow" href=#>Read More <i
+                    class="icon-arrow-right icon"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class=services_list-item>
+            <div class=cover>
+              <div class=cover_shape><img src=svg/shapes/13.svg alt=media></div>
+              <h4 class=cover_title>Engaging Product Shots and Campaigns</h4>
+            </div>
+            <div class=content>
+              <div class=content_bg>
+                <picture>
+                  <source data-srcset=img/index/service03.webp srcset=img/index/service03.webp type=image/webp><img
+                    class=lazy data-src=img/index/service03.jpg src=img/index/service03.jpg
+                    alt="Engaging Product Shots and Campaigns">
+                </picture><span class=content_bg-overlay></span>
+              </div>
+              <div class=content_main>
+                <h4 class=content_main-title>Engaging Product Shots and Campaigns</h4>
+                <p class=content_main-text>Curabitur non erat purus. Cras eu lorem et magna facilisis faucibus vel
+                  tempor purus. Donec eu lorem rutrum, condimentum sem feugiat, egestas</p><a
+                  class="content_main-btn btn btn--accent btn--arrow" href=#>Read More <i
+                    class="icon-arrow-right icon"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class=services_list-item>
+            <div class=cover>
+              <div class=cover_shape><img src=svg/shapes/03.svg alt=media></div>
+              <h4 class=cover_title>Copywriting and optimization</h4>
+            </div>
+            <div class=content>
+              <div class=content_bg>
+                <picture>
+                  <source data-srcset=img/index/service04.webp srcset=img/index/service04.webp type=image/webp><img
+                    class=lazy data-src=img/index/service04.jpg src=img/index/service04.jpg
+                    alt="Copywriting and optimization">
+                </picture><span class=content_bg-overlay></span>
+              </div>
+              <div class=content_main>
+                <h4 class=content_main-title>Copywriting and optimization</h4>
+                <p class=content_main-text>Curabitur non erat purus. Cras eu lorem et magna facilisis faucibus vel
+                  tempor purus. Donec eu lorem rutrum, condimentum sem feugiat, egestas</p><a
+                  class="content_main-btn btn btn--accent btn--arrow" href=#>Read More <i
+                    class="icon-arrow-right icon"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class=services_list-item>
+            <div class=cover>
+              <div class=cover_shape><img src=svg/shapes/04.svg alt=media></div>
+              <h4 class=cover_title>Viral Campaigns and Live Events</h4>
+            </div>
+            <div class=content>
+              <div class=content_bg>
+                <picture>
+                  <source data-srcset=img/index/service05.webp srcset=img/index/service05.webp type=image/webp><img
+                    class=lazy data-src=img/index/service05.jpg src=img/index/service05.jpg
+                    alt="Viral Campaigns and Live Events">
+                </picture><span class=content_bg-overlay></span>
+              </div>
+              <div class=content_main>
+                <h4 class=content_main-title>Viral Campaigns and Live Events</h4>
+                <p class=content_main-text>Curabitur non erat purus. Cras eu lorem et magna facilisis faucibus vel
+                  tempor purus. Donec eu lorem rutrum, condimentum sem feugiat, egestas</p><a
+                  class="content_main-btn btn btn--accent btn--arrow" href=#>Read More <i
+                    class="icon-arrow-right icon"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class=services_list-item>
+            <div class=cover>
+              <div class=cover_shape><img src=svg/shapes/07.svg alt=media></div>
+              <h4 class=cover_title>Content Strategy and scheduling</h4>
+            </div>
+            <div class=content>
+              <div class=content_bg>
+                <picture>
+                  <source data-srcset=img/index/service06.webp srcset=img/index/service06.webp type=image/webp><img
+                    class=lazy data-src=img/index/service06.jpg src=img/index/service06.jpg
+                    alt="Content Strategy and scheduling">
+                </picture><span class=content_bg-overlay></span>
+              </div>
+              <div class=content_main>
+                <h4 class=content_main-title>Content Strategy and scheduling</h4>
+                <p class=content_main-text>Curabitur non erat purus. Cras eu lorem et magna facilisis faucibus vel
+                  tempor purus. Donec eu lorem rutrum, condimentum sem feugiat, egestas</p><a
+                  class="content_main-btn btn btn--accent btn--arrow" href=#>Read More <i
+                    class="icon-arrow-right icon"></i></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+    <section class="brands gradient section">
+      <div class=brands_bg>
+        <picture>
+          <source data-srcset=img/gradients/10.webp srcset=img/gradients/10.webp type=image/webp><img class=lazy
+            data-src=img/gradients/10.png src=img/gradients/10.png alt=media>
+        </picture>
+      </div>
+      <div class=brands_header>
+        <div class=container>
+          <div class="brands_header-icon shape"><svg width=73 height=73 viewBox="0 0 73 73" fill=none
+              xmlns=http://www.w3.org/2000/svg>
+              <path
+                d="M44.993 71L36.5 53.2698L28.007 71L18.1104 66.9008L24.6419 48.3582L6.09932 54.8899L2 44.993L19.7302 36.5L2 28.007L6.09932 18.1103L24.6419 24.6418L18.1104 6.09921L28.007 2L36.5 19.7302L44.993 2L54.8899 6.09921L48.3582 24.6418L66.9008 18.1103L71 28.007L53.2698 36.5L71 44.993L66.9008 54.8899L48.3582 48.3582L54.8899 66.9008L44.993 71Z"
+                fill=transparent stroke=currentColor stroke-width=2 />
+            </svg></div>
+          <h1 class="brands_header-title outlined outlined--black" data-aos=fade-left>COMPANIES</h1>
+          <h2 class=brands_header-subtitle data-aos=fade-right>WE'VE WORKED WITH</h2>
+        </div>
+      </div>
+      <div class=brands_list>
+        <div class=brands_list-row><img class=brands_list-row_item src=svg/brands/Aarcs.png alt=media> <img
+            class=brands_list-row_item src=svg/brands/AmitiOverseas.png alt=media> <img class=brands_list-row_item
+            src=svg/brands/ark.png alt=media> <img class=brands_list-row_item src=svg/brands/armstrong.png alt=media>
+          <img class=brands_list-row_item src=svg/brands/ErkabAl-Khaleej.png alt=media> <img class=brands_list-row_item
+            src=svg/brands/GLOBALEXIM.png alt=media> <img class=brands_list-row_item
+            src=svg/brands/hairmacprofessionals.png alt=media>
+        </div>
+        <div class=brands_list-row><img class=brands_list-row_item src=svg/brands/househunt.png alt=media> <img
+            class=brands_list-row_item src=svg/brands/iwglass.png alt=media> <img class=brands_list-row_item
+            src=svg/brands/MarineMindAcademy.png alt=media> <img class=brands_list-row_item
+            src=svg/brands/MarketCityKurla.png alt=media> <img class=brands_list-row_item src=svg/brands/Mobilehub.png
+            alt=media> <img class=brands_list-row_item src=svg/brands/NNR.png alt=media> <img class=brands_list-row_item
+            src=svg/brands/RotaryclubNM.png alt=media> <img class=brands_list-row_item src=svg/brands/RYANSCHOOL.png
+            alt=media><img class=brands_list-row_item src=svg/brands/TectonaHills.png alt=media><img
+            class=brands_list-row_item src=svg/brands/thefashionstore.png alt=media><img class=brands_list-row_item
+            src=svg/brands/ThewhiteDoor.png alt=media><img class=brands_list-row_item src=svg/brands/upbright.png
+            alt=media></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer_bg">
+      <picture>
+        <source data-srcset="img/gradients/10.webp" srcset="img/gradients/10.webp" type="image/webp" />
+        <img class="lazy" data-src="img/gradients/10.jpg" src="img/gradients/10.jpg" alt="media" />
+      </picture>
+    </div>
+    <div class="container">
+      <div class="footer_about">
+        <div class="footer_about-slogan">
+          <div class="footer_about-slogan_icon rotate shape">
+            <svg width="73" height="73" viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M44.993 71L36.5 53.2698L28.007 71L18.1104 66.9008L24.6419 48.3582L6.09932 54.8899L2 44.993L19.7302 36.5L2 28.007L6.09932 18.1103L24.6419 24.6418L18.1104 6.09921L28.007 2L36.5 19.7302L44.993 2L54.8899 6.09921L48.3582 24.6418L66.9008 18.1103L71 28.007L53.2698 36.5L71 44.993L66.9008 54.8899L48.3582 48.3582L54.8899 66.9008L44.993 71Z"
+                fill="transparent" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </div>
+          <h2 class="footer_about-slogan_title">
+            Now we’re
+            <span class="h1 linebreak outlined outlined--white">Talking</span>
+          </h2>
+          <p class="footer_about-slogan_text">
+            Ready to tranform your ideas into reality? <br>
+            Reach out now for personalizes serivce and let's bring your vision to life!
+          </p>
+        </div>
+
+        <!-- <input class="field" type="text" data-type="email" placeholder="Your Contact E-mail" /> -->
+        <button class="btn btn--accent btn--hover-o">Chat on WhatsApp
+
+          <a href="https://api.whatsapp.com/send?phone=7400226221" target="_blank"></a>
+        </button>
+      </div>
+      <div class="footer_main d-flex">
+        <div class="footer_main-block">
+          <h4 class="footer_main-block_title">Follow Us</h4>
+          <ul class="footer_main-block_socials socials">
+            <li>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <i class="icon-instagram"></i>
+              </a>
+            </li>
+            <!-- <li>
+                            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+                                <i class="icon-tiktok"></i>
+                            </a>
+                        </li> -->
+            <li>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                <i class="icon-youtube"></i>
+              </a>
+            </li>
+            <!-- <li>
+                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                                <i class="icon-facebook"></i>
+                            </a>
+                        </li> -->
+          </ul>
+        </div>
+        <div class="footer_main-block">
+          <h4 class="footer_main-block_title">Get In Touch</h4>
+          <div class="footer_main-block_content d-flex flex-column">
+            <a class="link link--underline" href="tel:+917400226221">+917400226221</a>
+            <a class="link link--underline" href="tel:+917977847576">+917977847576</a>
+            <a class="link link--underline" href="mailto:info@designcody.in">info@designcody.in</a>
+          </div>
+        </div>
+        <!-- <div class="footer_main-block">
+                    <h4 class="footer_main-block_title">Business Enquiries</h4>
+                    <div class="footer_main-block_content">
+                        <a class="link link--underline" href="#">@upcreators_info</a>
+                    </div>
+                </div> -->
+        <div class="footer_main-block">
+          <h4 class="footer_main-block_title">Location</h4>
+          <div class="footer_main-block_content">
+            <span>Haware Centurion, <span class="linebreak">Seawoods, Navi Mumbai 400706</span></span>
+          </div>
+        </div>
+        <div class="footer_main-block">
+          <h4 class="footer_main-block_title">Pages</h4>
+          <ul class="footer_main-block_nav d-flex">
+            <li>
+              <a class="nav-link" href="index.html" data-page="home" data-page-parent="home">Home</a>
+            </li>
+            <li>
+              <a class="nav-link" href="about.html" data-page="about">About</a>
+            </li>
+            <li>
+              <a class="nav-link" href="ourwork.html" data-page="ourwork" data-page-parent="ourwork">Our Works</a>
+            </li>
+            <li>
+              <a class="nav-link" href="services.html" data-page="events">Services</a>
+            </li>
+            <!-- <li>
+              <a class="nav-link" href="shop.html" data-page="shop" data-page-parent="shop">Collaborators</a>
+            </li> -->
+            <li>
+              <a class="nav-link" href="contacts.html" data-page="contacts" data-page-parent="news">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h1>
+      <p class="footer_copy">Copyright@ <span id="currentYear"></span> Design Cody </p>
+    </h1>
+  </footer>
+  <!-- <div class=cart_popup>
+    <div class=cart_popup-backdrop></div>
+    <div class=cart_popup-helper>
+      <div class=cart_popup-wrapper>
+        <div class="cart_popup-header d-flex flex-wrap justify-content-between align-items-center">
+          <h4 class=success><i class="icon icon-check"></i> Item Added</h4><span class=cartID>Cart Id: 12345</span>
+          <p class=note>Please note: Item(s) is not reserved until checkout is completed</p>
+        </div>
+        <div class=cart_popup-main>
+          <ul class=cart_popup-main_list>
+            <li class=list-item>
+              <div class=media>
+                <picture>
+                  <source data-srcset=img/cart/01.webp srcset=img/cart/01.webp type=image/webp><img class=lazy
+                    data-src=img/cart/01.jpg src=img/cart/01.jpg alt="Limited Edition T-Shirt">
+                </picture>
+              </div>
+              <div class=main>
+                <div class=main_info>
+                  <div class=wrapper><span class=main_info-label>Clothing</span> <a class=main_info-remove href=#><span
+                        class=text>remove</span> <i class="icon icon-close"></i></a></div>
+                  <h6 class=main_info-title>Limited Edition T-Shirt</h6>
+                  <ul class=main_info-details>
+                    <li><span class=property>size:</span> <span class=value>s</span></li>
+                    <li><span class=property>color:</span> <span class=value>pink</span></li>
+                  </ul>
+                  <div class=wrapper>
+                    <div class=main_info-qty><span class=main_info-qty_label>Qty:</span>
+                      <div class=qty><span class="qty_minus control"><i class=icon-minus></i> </span><input
+                          class=qty_amount type=number readonly=readonly value=1 min=1 max=99 hidden> <span
+                          class=qty_amount-display></span> <span class="qty_plus control"><i class=icon-plus></i></span>
+                      </div>
+                    </div><span class=main_info-price>$320</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class=list-item>
+              <div class=media>
+                <picture>
+                  <source data-srcset=img/cart/02.webp srcset=img/cart/02.webp type=image/webp><img class=lazy
+                    data-src=img/cart/02.jpg src=img/cart/02.jpg alt="Red Flame Jacket">
+                </picture>
+              </div>
+              <div class=main>
+                <div class=main_info>
+                  <div class=wrapper><span class=main_info-label>Clothing</span> <a class=main_info-remove href=#><span
+                        class=text>remove</span> <i class="icon icon-close"></i></a></div>
+                  <h6 class=main_info-title>Red Flame Jacket</h6>
+                  <ul class=main_info-details>
+                    <li><span class=property>size:</span> <span class=value>s</span></li>
+                    <li><span class=property>color:</span> <span class=value>pink</span></li>
+                  </ul>
+                  <div class=wrapper>
+                    <div class=main_info-qty><span class=main_info-qty_label>Qty:</span>
+                      <div class=qty><span class="qty_minus control"><i class=icon-minus></i> </span><input
+                          class=qty_amount type=number readonly=readonly value=1 min=1 max=99 hidden> <span
+                          class=qty_amount-display></span> <span class="qty_plus control"><i class=icon-plus></i></span>
+                      </div>
+                    </div><span class=main_info-price>$320</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class=list-item>
+              <div class=media>
+                <picture>
+                  <source data-srcset=img/cart/03.webp srcset=img/cart/03.webp type=image/webp><img class=lazy
+                    data-src=img/cart/03.jpg src=img/cart/03.jpg alt="Festival Necklace">
+                </picture>
+              </div>
+              <div class=main>
+                <div class=main_info>
+                  <div class=wrapper><span class=main_info-label>Clothing</span> <a class=main_info-remove href=#><span
+                        class=text>remove</span> <i class="icon icon-close"></i></a></div>
+                  <h6 class=main_info-title>Festival Necklace</h6>
+                  <ul class=main_info-details>
+                    <li><span class=property>size:</span> <span class=value>s</span></li>
+                    <li><span class=property>color:</span> <span class=value>pink</span></li>
+                  </ul>
+                  <div class=wrapper>
+                    <div class=main_info-qty><span class=main_info-qty_label>Qty:</span>
+                      <div class=qty><span class="qty_minus control"><i class=icon-minus></i> </span><input
+                          class=qty_amount type=number readonly=readonly value=1 min=1 max=99 hidden> <span
+                          class=qty_amount-display></span> <span class="qty_plus control"><i class=icon-plus></i></span>
+                      </div>
+                    </div><span class=main_info-price>$320</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class=cart_popup-footer>
+          <div class="cart_popup-footer_summary d-flex flex-column">
+            <div class=subtotal><span class=subtotal_title>Subtotal</span> <span class=subtotal_sum>$1320.00</span>
+            </div>
+            <div class="total h6"><span class=total_title>Total</span> <span class=total_sum>$1320.00</span></div>
+          </div>
+          <div class="cart_popup-footer_action d-flex"><a class="btn btn--black" href=cart.html>View options</a> <a
+              class="btn btn--accent btn--hover-black" href=cart.html>Checkout</a></div>
+          <p class=note>Suspendisse potenti. Fusce id cursus massa. Duis tuc uno venenatis ex</p>
+        </div>
+      </div>
+    </div> -->
+  </div><button class=scrollTrigger id=scrollTrigger><i class=icon-to-top></i></button>
+  <script id=www-widgetapi-script src=https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js
+    async=""></script>
+  <script src=https://www.youtube.com/player_api></script>
+  <script src=js/common.min.js></script>
+  <script src=js/lottie.min.js></script>
+  <script src=js/index.min.js></script>
+  <script src=js/ticker.min.js></script>
+  <script src=js/demo.min.js></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36HJ7C5V9Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-36HJ7C5V9Y');
+  </script>
+
+  <script>
+
+    function prev() {
+      document.getElementById('slider-container').scrollLeft -= 270;
+    }
+
+    function next() {
+      document.getElementById('slider-container').scrollLeft += 270;
+    }
+
+
+    $(".slide img").on("click", function () {
+      $(this).toggleClass('zoomed');
+      $(".overlay").toggleClass('active');
+    })
+
+  </script>
+</body>
+
+</html>
